@@ -15,5 +15,7 @@ while true; do
             $url
     done
 
+    python3 /rssgen.py
+
     sleep 12345
 done
