@@ -15,16 +15,17 @@ info_path_list.sort(reverse=True)
 episodes = [ ]
 trash = [ ]
 
-trash_start_date = datetime.datetime.today() - datetime.timedelta(days=KEEP_DAYS)
+keep_start_time = datetime.datetime.now() - datetime.timedelta(days=KEEP_DAYS)
 
 for info_path in info_path_list:
     with open(info_path) as f:
         info = json.load(f)
 
-    mp3_name = os.path.basename(info_path).replace(".info.json", ".mp3")
-    date = datetime.datetime.strptime(info["upload_date"], "%Y%m%d")
+    info_basename = os.path.basename(info_path)
+    info_time = datetime.datetime.strptime(info_basename[:12], "%Y%m%d%H%M")
+    mp3_name = info_basename.replace(".info.json", ".mp3")
 
-    if date < trash_start_date:
+    if info_time < keep_start_time:
         trash += [ info_path, os.path.join(DIR, mp3_name) ]
         continue
 
@@ -47,7 +48,7 @@ for info_path in info_path_list:
             length = 0
         ),
         guid = orig_url,
-        pubDate = date
+        pubDate = info_time
     ))
 
     print("Episode: " + title)

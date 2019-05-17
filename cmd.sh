@@ -11,7 +11,7 @@ while true; do
             --match-filter '!is_live & duration > 299' \
             --download-archive '/ytpod/archive.txt' \
             --write-info-json \
-            -o '/ytpod/public/%(upload_date)s-%(id)s.%(ext)s' \
+            -o "/ytpod/public/$(date +%Y%m%d%H%M)-%(id)s.%(ext)s" \
             $url
     done
 
