@@ -32,12 +32,14 @@ for info_path in info_path_list:
     title = info["title"]
     author = info["uploader"]
     orig_url = info["webpage_url"]
+    upload_date = info["upload_date"]
 
     episodes.append(PyRSS2Gen.RSSItem(
         title = title,
         link = orig_url,
-        description = "<p>%s</p> <p><a href=\"%s\"><img src=\"%s\"></a></p>" % (
+        description = "<p>%s &bull; %s.%s.%s</p> <p><a href=\"%s\"><img src=\"%s\"></a></p>" % (
             html.escape(author),
+            upload_date[6:8], upload_date[4:6], upload_date[0:4],
             html.escape(orig_url),
             html.escape(info["thumbnail"])
         ),
