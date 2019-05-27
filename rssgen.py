@@ -25,7 +25,7 @@ for info_path in info_path_list:
     info_time = datetime.datetime.strptime(info_basename[:12], "%Y%m%d%H%M")
     mp3_name = info_basename.replace(".info.json", ".mp3")
 
-    if info_time < keep_start_time:
+    if info_time < keep_start_time or len(episodes) > 19:
         trash += [ info_path, os.path.join(DIR, mp3_name) ]
         continue
 
