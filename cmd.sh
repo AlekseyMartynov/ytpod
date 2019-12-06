@@ -3,7 +3,7 @@ mkdir -p /ytpod/public
 while true; do
     pip3 install --upgrade youtube-dl
 
-    for url in $(cat /ytpod/urls.txt); do
+    for url in $(awk '{print $1}' /ytpod/urls.txt); do
         youtube-dl -v -i -x \
             --audio-format mp3 \
             --audio-quality 5 \
