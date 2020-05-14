@@ -6,7 +6,7 @@ import os
 import PyRSS2Gen
 
 DIR = "/ytpod/public"
-URL = "https://do-3.amartynov.ru/ytpod"
+URL = os.environ["YTPOD_URL"]
 KEEP_DAYS = 15
 
 info_path_list = glob.glob(DIR + "/*.info.json")
