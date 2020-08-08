@@ -1,4 +1,5 @@
 mkdir -p /ytpod/public
+chmod 0777 /ytpod_update
 
 while true; do
     pip3 install --upgrade youtube-dl
@@ -17,5 +18,10 @@ while true; do
 
     python3 /rssgen.py
 
-    sleep 12345
+    rm -f /ytpod_update/requested
+
+    for i in `seq 12345`; do
+        sleep 1
+        [ -f /ytpod_update/requested ] && break
+    done
 done
