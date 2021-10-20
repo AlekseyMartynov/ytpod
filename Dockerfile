@@ -1,7 +1,7 @@
-FROM alpine:3.11
+FROM alpine:3.13
 
-RUN apk add --no-cache python3 ffmpeg
-RUN pip3 install youtube-dl PyRSS2Gen
+RUN apk add --no-cache python3 py3-pip ffmpeg gcc musl-dev
+RUN pip3 install yt-dlp PyRSS2Gen
 
 ADD cmd.sh rssgen.py /
 

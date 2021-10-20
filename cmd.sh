@@ -2,10 +2,11 @@ mkdir -p /ytpod/public
 chmod 0777 /ytpod_update
 
 while true; do
-    pip3 install --upgrade youtube-dl
+    pip3 install --upgrade yt-dlp
 
     for url in $(awk '{print $1}' /ytpod/urls.txt); do
-        youtube-dl -v -i -x \
+        yt-dlp -v -i -x \
+            --compat-options all \
             --audio-format mp3 \
             --audio-quality 5 \
             --playlist-items 1-3 \
