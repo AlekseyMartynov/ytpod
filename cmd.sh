@@ -10,7 +10,7 @@ while true; do
             --audio-format mp3 \
             --audio-quality 5 \
             --playlist-items 1-3 \
-            --match-filter '!is_live & duration > 299' \
+            --match-filter '!is_live & duration > 299 & url!*=yt_premiere_broadcast' \
             --download-archive '/ytpod/archive.txt' \
             --write-info-json \
             -o "/ytpod/public/$(date +%Y%m%d%H%M)-%(id)s.%(ext)s" \
