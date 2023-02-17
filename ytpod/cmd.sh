@@ -2,10 +2,10 @@ mkdir -p /ytpod/public
 chmod 0777 /ytpod_update
 
 while true; do
-    pip3 install --upgrade yt-dlp
+    sh /yt-dlp-update.sh
 
     for url in $(awk '{print $1}' /ytpod/urls.txt); do
-        yt-dlp -v -i -x \
+        /yt-dlp -v -i -x \
             --compat-options all \
             --audio-format mp3 \
             --audio-quality 5 \
