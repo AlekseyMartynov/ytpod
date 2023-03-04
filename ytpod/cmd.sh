@@ -2,7 +2,7 @@ mkdir -p /ytpod/public
 chmod 0777 /ytpod_update
 
 while true; do
-    sh /yt-dlp-update.sh
+    /yt-dlp --update-to stable
 
     for url in $(awk '{print $1}' /ytpod/urls.txt); do
         /yt-dlp -v -i -x \
