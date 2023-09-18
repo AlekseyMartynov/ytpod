@@ -61,7 +61,7 @@ rss = PyRSS2Gen.RSS2(
     link = "",
     description = "",
     image = PyRSS2Gen.Image(
-        url = "https://via.placeholder.com/720/272727/f00?text=YT",
+        url = "https://placehold.co/720/272727/f00.png?text=YT&font=opensans",
         title = "YouTube",
         link = ""
     ),
