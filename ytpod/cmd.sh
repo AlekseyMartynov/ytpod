@@ -2,6 +2,8 @@ mkdir -p /ytpod/public
 chmod 0777 /ytpod_update
 
 while true; do
+    unlink /ytpod/public/*.part
+
     /yt-dlp --update-to stable
 
     for url in $(awk '{print $1}' /ytpod/urls.txt); do
