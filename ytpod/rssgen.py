@@ -30,7 +30,7 @@ for info_path in info_path_list:
         continue
 
     title = info["title"]
-    author = info["uploader"]
+    author = info["uploader"] or info["uploader_id"]
     orig_url = info["webpage_url"]
     upload_date = info["upload_date"] or "00000000"
     thumbnail_url = info["thumbnail"] or "https://i.ytimg.com/vi/%s/hqdefault.jpg" % info["id"]
