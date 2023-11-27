@@ -15,6 +15,7 @@ while true; do
             --match-filter '!is_live & duration > 299 & url!*=yt_premiere_broadcast' \
             --download-archive '/ytpod/archive.txt' \
             --write-info-json \
+            --embed-chapters \
             -o "/ytpod/public/$(date +%Y%m%d%H%M)-%(id)s.%(ext)s" \
             $url
     done
