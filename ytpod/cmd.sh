@@ -2,7 +2,9 @@ mkdir -p /ytpod/public
 chmod 0777 /ytpod_update
 
 while true; do
-    unlink /ytpod/public/*.part
+    for i in m4a part; do
+        rm -f /ytpod/public/*.$i
+    done
 
     /yt-dlp --update-to stable
 
