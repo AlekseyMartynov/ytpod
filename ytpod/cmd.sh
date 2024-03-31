@@ -2,7 +2,7 @@ mkdir -p /ytpod/public
 chmod 0777 /ytpod_update
 
 while true; do
-    for i in m4a part; do
+    for i in m4a part webm; do
         rm -f /ytpod/public/*.$i
     done
 
