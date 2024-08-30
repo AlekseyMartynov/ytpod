@@ -10,6 +10,7 @@ while true; do
 
     for url in $(awk '{print $1}' /ytpod/urls.txt); do
         /yt-dlp -v -i -x \
+            --cookies /cookies.txt \
             --no-write-playlist-metafiles \
             --audio-format mp3 \
             --audio-quality 5 \

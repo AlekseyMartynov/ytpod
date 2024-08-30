@@ -5,3 +5,5 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/v3.15/c
 
 RUN apk add --no-cache python3
 RUN wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /yt-dlp && chmod +x /yt-dlp
+
+ADD cookies.txt /
