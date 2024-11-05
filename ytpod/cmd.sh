@@ -19,6 +19,8 @@ while true; do
             --download-archive '/ytpod/archive.txt' \
             --write-info-json \
             --embed-chapters \
+            --write-thumbnail \
+            --convert-thumbnails webp \
             -o "/ytpod/public/$(date +%Y%m%d%H%M)-%(id)s.%(ext)s" \
             $url
     done

@@ -24,16 +24,17 @@ for info_path in info_path_list:
     info_basename = os.path.basename(info_path)
     info_time = datetime.datetime.strptime(info_basename[:12], "%Y%m%d%H%M")
     mp3_name = info_basename.replace(".info.json", ".mp3")
+    thumb_name = mp3_name.replace(".mp3", ".webp")
 
     if info_time < keep_start_time or len(episodes) > 19:
-        trash += [ info_path, os.path.join(DIR, mp3_name) ]
+        trash += [ info_path, os.path.join(DIR, mp3_name), os.path.join(DIR, thumb_name) ]
         continue
 
     title = info["title"]
     author = info["uploader"] or info["uploader_id"]
     orig_url = info["webpage_url"]
     upload_date = info["upload_date"] or "00000000"
-    thumbnail_url = info["thumbnail"] or "https://i.ytimg.com/vi/%s/hqdefault.jpg" % info["id"]
+    thumbnail_url = URL + "/" + thumb_name
 
     episodes.append(PyRSS2Gen.RSSItem(
         title = title,
