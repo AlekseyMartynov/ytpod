@@ -1,3 +1,5 @@
+. /opt/venv/bin/activate
+
 mkdir -p /ytpod/public
 chmod 0777 /ytpod_update
 

@@ -1,7 +1,7 @@
 FROM private/ytbase
 
 RUN apk add --no-cache py3-pip
-RUN pip3 install PyRSS2Gen --use-pep517
+RUN python3 -m venv /opt/venv && /opt/venv/bin/pip3 install PyRSS2Gen
 
 ADD cmd.sh rssgen.py /
 
