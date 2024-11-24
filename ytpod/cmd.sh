@@ -1,3 +1,6 @@
+renice -n 10 -p $$
+ionice -c 3  -p $$
+
 . /opt/venv/bin/activate
 
 mkdir -p /ytpod/public
