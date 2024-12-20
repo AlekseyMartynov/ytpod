@@ -6,6 +6,13 @@ ionice -c 3  -p $$
 mkdir -p /ytpod/public
 chmod 0777 /ytpod_update
 
+touch /ytpod/urls_dynamic.txt
+
+combine_urls() {
+    cat /ytpod/urls_dynamic.txt
+    awk '{print $1}' /ytpod/urls.txt
+}
+
 while true; do
     for i in m4a part webm; do
         rm -f /ytpod/public/*.$i
@@ -13,7 +20,7 @@ while true; do
 
     /yt-dlp --update-to stable
 
-    for url in $(awk '{print $1}' /ytpod/urls.txt); do
+    for url in $(combine_urls); do
         /yt-dlp -v -i -x \
             --cookies /cookies.txt \
             --no-write-playlist-metafiles \
