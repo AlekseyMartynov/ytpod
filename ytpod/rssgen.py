@@ -24,10 +24,12 @@ for info_path in info_path_list:
     info_basename = os.path.basename(info_path)
     info_time = datetime.datetime.strptime(info_basename[:12], "%Y%m%d%H%M")
     mp3_name = info_basename.replace(".info.json", ".mp3")
+    mp3_path = os.path.join(DIR, mp3_name)
     thumb_name = mp3_name.replace(".mp3", ".webp")
+    thumb_path = os.path.join(DIR, thumb_name)
 
-    if info_time < keep_start_time or len(episodes) > 19:
-        trash += [ info_path, os.path.join(DIR, mp3_name), os.path.join(DIR, thumb_name) ]
+    if info_time < keep_start_time or len(episodes) > 19 or not os.path.isfile(mp3_path):
+        trash += [ info_path, mp3_path, thumb_path ]
         continue
 
     title = info["title"]
