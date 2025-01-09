@@ -32,10 +32,10 @@ for info_path in info_path_list:
         trash += [ info_path, mp3_path, thumb_path ]
         continue
 
-    title = info["title"]
-    author = info["uploader"] or info["uploader_id"]
-    orig_url = info["webpage_url"]
-    upload_date = info["upload_date"] or "00000000"
+    title = info.get("title")
+    author = info.get("uploader") or info.get("uploader_id")
+    orig_url = info.get("webpage_url")
+    upload_date = info.get("upload_date") or "00000000"
     thumbnail_url = URL + "/" + thumb_name
 
     episodes.append(PyRSS2Gen.RSSItem(
