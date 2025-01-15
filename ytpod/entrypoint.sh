@@ -23,6 +23,7 @@ while true; do
 
     for url in $(combine_urls); do
         /yt-dlp -v -i -x \
+            --extractor-args "youtube:player_client=default,-web_creator" \
             --cookies /cookies.txt \
             --no-write-playlist-metafiles \
             --audio-format mp3 \
