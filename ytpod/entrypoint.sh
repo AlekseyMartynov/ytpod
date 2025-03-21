@@ -1,6 +1,11 @@
 renice -n 10 -p $$
 ionice -c 3  -p $$
 
+mkfifo /run/yt-dlp-out /run/yt-dlp-err
+
+stdbuf -oL tail -f -n +1 /run/yt-dlp-out &
+stdbuf -oL tail -f -n +1 /run/yt-dlp-err | tee -a /ytpod/public/yt-dlp-err.txt &
+
 . /opt/venv/bin/activate
 
 mkdir -p /ytpod/public
@@ -21,8 +26,11 @@ while true; do
 
     /yt-dlp --update-to stable
 
+    truncate -s 0 /ytpod/public/yt-dlp-err.txt
+
     for url in $(combine_urls); do
         /yt-dlp -v -i -x \
+            --color stdout:always \
             --cookies /cookies.txt \
             --no-write-playlist-metafiles \
             --audio-format mp3 \
@@ -35,7 +43,7 @@ while true; do
             --write-thumbnail \
             --convert-thumbnails webp \
             -o "/ytpod/public/$(date +%Y%m%d%H%M)-%(id)s.%(ext)s" \
-            $url
+            $url 1>/run/yt-dlp-out 2>/run/yt-dlp-err
     done
 
     python3 /rssgen.py
