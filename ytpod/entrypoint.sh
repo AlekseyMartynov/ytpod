@@ -1,18 +1,18 @@
 renice -n 10 -p $$
 ionice -c 3  -p $$
 
+mkdir -p /ytpod/public
+chmod 0777 /ytpod_update
+
+touch /ytpod_update/urls_dynamic.txt
+chmod 0666 /ytpod_update/urls_dynamic.txt
+
 mkfifo /run/yt-dlp-out /run/yt-dlp-err
 
 stdbuf -oL tail -f -n +1 /run/yt-dlp-out &
 stdbuf -oL tail -f -n +1 /run/yt-dlp-err | tee -a /ytpod/public/yt-dlp-err.txt &
 
 . /opt/venv/bin/activate
-
-mkdir -p /ytpod/public
-chmod 0777 /ytpod_update
-
-touch /ytpod_update/urls_dynamic.txt
-chmod 0666 /ytpod_update/urls_dynamic.txt
 
 combine_urls() {
     cat /ytpod_update/urls_dynamic.txt
