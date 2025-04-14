@@ -21,15 +21,28 @@ for info_path in info_path_list:
     with open(info_path) as f:
         info = json.load(f)
 
-    info_basename = os.path.basename(info_path)
-    info_time = datetime.datetime.strptime(info_basename[:12], "%Y%m%d%H%M")
-    mp3_name = info_basename.replace(".info.json", ".mp3")
-    mp3_path = os.path.join(DIR, mp3_name)
-    thumb_name = mp3_name.replace(".mp3", ".webp")
-    thumb_path = os.path.join(DIR, thumb_name)
+    info_slug = os.path.basename(info_path)[:-10]
+    info_time = datetime.datetime.strptime(info_slug[:12], "%Y%m%d%H%M")
 
-    if info_time < keep_start_time or len(episodes) > 19 or not os.path.isfile(mp3_path):
-        trash += [ info_path, mp3_path, thumb_path ]
+    audio_name = ""
+    thumb_name = ""
+
+    for ext in [".opus", ".m4a", ".mp4", ".mp3"]:
+        if os.path.isfile(DIR + "/" + info_slug + ext):
+            audio_name = info_slug + ext
+            break
+
+    for ext in [".webp", ".jpg"]:
+        if os.path.isfile(DIR + "/" + info_slug + ext):
+            thumb_name = info_slug + ext
+            break
+
+    if info_time < keep_start_time or len(episodes) > 19 or not audio_name:
+        trash.append(info_path)
+        if audio_name:
+            trash.append(DIR + "/" + audio_name)
+        if thumb_name:
+            trash.append(DIR + "/" + thumb_name)
         continue
 
     title = info.get("title")
@@ -49,7 +62,7 @@ for info_path in info_path_list:
         ),
         author = author,
         enclosure = PyRSS2Gen.Enclosure(
-            url = URL + "/" + mp3_name,
+            url = URL + "/" + audio_name,
             type = "audio/mpeg",
             length = 0
         ),

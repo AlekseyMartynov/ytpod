@@ -20,7 +20,7 @@ combine_urls() {
 }
 
 while true; do
-    for i in m4a part webm; do
+    for i in part webm; do
         rm -f /ytpod/public/*.$i
     done
 
@@ -33,15 +33,12 @@ while true; do
             --color stdout:always \
             --cookies /cookies.txt \
             --no-write-playlist-metafiles \
-            --audio-format mp3 \
-            --audio-quality 5 \
             --playlist-items 1-3 \
             --match-filter '!is_live & duration > 299 & url!*=yt_premiere_broadcast' \
             --download-archive '/ytpod/archive.txt' \
             --write-info-json \
             --embed-chapters \
             --write-thumbnail \
-            --convert-thumbnails webp \
             -o "/ytpod/public/$(date +%Y%m%d%H%M)-%(id)s.%(ext)s" \
             $url 1>/run/yt-dlp-out 2>/run/yt-dlp-err
     done
