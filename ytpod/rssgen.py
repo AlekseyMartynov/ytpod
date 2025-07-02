@@ -6,7 +6,7 @@ import os
 import PyRSS2Gen
 
 DIR = "/ytpod/public"
-URL = os.environ["YTPOD_URL"]
+URL = "https://example.net/ytpod" # replace with nginx sub_filter
 KEEP_DAYS = 15
 
 info_path_list = glob.glob(DIR + "/*.info.json")
