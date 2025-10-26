@@ -20,7 +20,7 @@ combine_urls() {
 }
 
 while true; do
-    for i in part webm; do
+    for i in part webm ytdl; do
         rm -f /ytpod/public/*.$i
     done
 
