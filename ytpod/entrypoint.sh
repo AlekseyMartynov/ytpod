@@ -28,20 +28,18 @@ while true; do
 
     truncate -s 0 /ytpod/public/yt-dlp-err.txt
 
-    for url in $(combine_urls); do
-        /yt-dlp -v -i -x \
-            --color stdout:always \
-            --cookies /cookies.txt \
-            --no-write-playlist-metafiles \
-            --playlist-items 1-3 \
-            --match-filter '!is_live & duration > 299 & url!*=yt_premiere_broadcast' \
-            --download-archive '/ytpod/archive.txt' \
-            --write-info-json \
-            --embed-chapters \
-            --write-thumbnail \
-            -o "/ytpod/public/$(date +%Y%m%d%H%M)-%(id)s.%(ext)s" \
-            $url 1>/run/yt-dlp-out 2>/run/yt-dlp-err
-    done
+    /yt-dlp -v -i -x \
+        --color stdout:always \
+        --cookies /cookies.txt \
+        --no-write-playlist-metafiles \
+        --playlist-items 1-3 \
+        --match-filter '!is_live & duration > 299 & url!*=yt_premiere_broadcast' \
+        --download-archive '/ytpod/archive.txt' \
+        --write-info-json \
+        --embed-chapters \
+        --write-thumbnail \
+        -o "/ytpod/public/$(date +%Y%m%d%H%M)-%(id)s.%(ext)s" \
+        -- $(combine_urls | xargs) 1>/run/yt-dlp-out 2>/run/yt-dlp-err
 
     python3 /rssgen.py
 
